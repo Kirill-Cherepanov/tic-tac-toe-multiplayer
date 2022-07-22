@@ -1,0 +1,434 @@
+@font-face 
+    font-family: "evil-empire"
+    src: url("../assets/fonts/EvilEmpire.ttf")
+
+$main-color: #43A6C6
+$second-color: darken($main-color, 30%)
+    
+*, *::after, *::before 
+    box-sizing: border-box
+
+body
+    font-family: "evil-empire", sans-serif
+    margin: 0
+
+h2
+    @media (min-width: 768px) 
+        font-size: 1.8rem
+    @media (min-width: 1900px)
+        font-size: 2rem
+
+.page
+    margin: 0 auto
+    width: 315px
+    @media (min-width: 768px) 
+        width: 380px
+    @media (min-width: 1900px)
+        width: 470px
+
+.tic-tac-toe-title
+    color: $second-color
+    letter-spacing: 2px
+    font-size: 2.15rem
+    text-align: center
+    @media (min-width: 768px)
+        font-size: 2.5rem
+    @media (min-width: 1900px)
+        font-size: 3rem
+
+
+.tic-tac-toe-game
+    color: $second-color
+    position: relative
+    width: 315px
+    height: 315px
+    @media (min-width: 768px) 
+        width: 380px
+        height: 380px
+    @media (min-width: 1900px)
+        width: 470px
+        height: 470px
+
+.gameboard
+    width: 100%
+    height: 100%
+    margin-bottom: 15px 
+    gap: 5px
+    display: grid
+    grid-template-rows: repeat(3, 1fr)
+    grid-template-columns: repeat(3, 1fr)
+
+.cell
+    background-color: $main-color
+    display: flex
+    justify-content: center
+    align-items: center
+    position: relative
+    cursor: pointer
+
+.cell.x,
+.cell.o
+    cursor: not-allowed
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before
+    background-color: $second-color
+
+.gameboard.x .cell:not(.x):not(.o):hover::before,
+.gameboard.x .cell:not(.x):not(.o):hover::after,
+.gameboard.o .cell:not(.x):not(.o):hover::before
+    background-color: lighten($main-color, 20%)
+
+.cell.x::before,
+.cell.x::after,
+.gameboard.x .cell:not(.x):not(.o):hover::before,
+.gameboard.x .cell:not(.x):not(.o):hover::after
+    position: absolute
+    content: ''
+    width: 12%
+    height: 100%
+    border-radius: 10px
+
+.cell.x::before,
+.gameboard.x .cell:not(.x):not(.o):hover::before
+    transform: rotate(45deg) 
+
+.cell.x::after,
+.gameboard.x .cell:not(.x):not(.o):hover::after
+    transform: rotate(-45deg) 
+
+.cell.o::before,
+.cell.o::after,
+.gameboard.o .cell:not(.x):not(.o):hover::before,
+.gameboard.o .cell:not(.x):not(.o):hover::after
+    position: absolute
+    content: ''
+    border-radius: 50%
+    
+.cell.o::before,
+.gameboard.o .cell:not(.x):not(.o):hover::before
+    width: 85%
+    height: 85%
+
+
+.cell.o::after,
+.gameboard.o .cell:not(.x):not(.o):hover::after
+    background-color: $main-color
+    width: 65%
+    height: 65%
+
+.end-message
+    visibility: hidden
+    opacity: 0
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    position: absolute
+    top: 0
+    z-index: 1
+    width: 100%
+    height: 100%
+    background-color: rgba(255, 255, 255, 0.85)
+    transition: opacity 1s
+    .end-text
+        text-align: center
+        font-size: 2rem
+        letter-spacing: 1px
+    #restart-button, 
+    #game-start,
+    #game-leave,
+    #game-rematch
+        font-size: 1.2rem
+        background-color: $second-color
+        color: #fff
+        border: none
+        width: 40%
+        padding: 8px 0
+        margin-top: 10px
+        cursor: pointer
+        font-family: "evil-empire"
+        letter-spacing: 1px
+        @media (min-width: 768px)
+            margin-top: 15px
+    &.show
+        visibility: visible
+        opacity: 1
+
+.multiplayer-menu
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 0
+    width: 100%
+    height: 100%
+    background-color: #fff
+    box-shadow: 0px 0px 15px 3px $main-color
+    &.search
+        display: flex
+        .pending-invites.show,
+        .players-online
+            display: flex
+    &.entering-username 
+        display: flex
+        .username-form-container
+            display: flex
+
+.username-form-container
+    height: 100%
+    width: 100%
+    display: none
+    justify-content: center
+    align-items: center
+    #username-form
+        display: flex
+        flex-direction: column
+        padding-bottom: 25px
+        .username-label
+            font-size: 1.2rem
+            margin-bottom: 15px
+            text-align: center
+        #username
+            height: 25px
+            margin-bottom: 5px
+            border: 1px solid $second-color
+            border-radius: 3px
+        #submit-username
+            height: 25px
+            font-size: 1rem
+            border: none
+            background-color: $second-color
+            color: #fff
+            border-radius: 3px
+            cursor: pointer
+
+.pending-invites
+    display: none
+    flex-direction: column
+    width: 100%
+    max-height: 125px
+    overflow-y: scroll
+    background-color: #fff
+    position: relative
+    gap: 10px
+    margin-bottom: 10px
+    box-shadow: 0px 5px 10px #888;
+    @media (min-width: 768px)
+        max-height: 170px
+    &:last-child
+        margin: 0px
+
+.players-online
+    display: none
+    flex-direction: column
+    width: 100%
+    flex-grow: 1
+    overflow-y: scroll
+    background-color: #fff
+    position: relative
+    gap: 10px
+    &:last-child
+        margin: 0px
+
+.multiplayer-session
+    flex: 0 0 35px
+    color: $second-color
+    border: none
+    text-align: left
+    background-color: lighten($main-color, 30%)
+    font-size: 1.3rem
+    cursor: pointer
+    &:hover
+        background-color: $main-color
+    &.confirm
+        color: #fff
+        background-color: $second-color
+        cursor: initial
+        .session-icon
+            display: block
+    &.active
+        background-color: lighten(green, 20%)
+        cursor: initial
+        .cancel-icon
+            display: block
+    &.pending
+        background-color: #8b008b
+        color: #fff
+        .session-icon
+            display: block
+
+    .session-icon
+        display: none
+        float: right
+        margin-left: 10px
+        background-size: contain
+        background-repeat: no-repeat
+        cursor: pointer
+        width: 25px
+        height: 25px
+    .accept-icon
+        background-image: url('../assets/icons/accept.png')
+    .cancel-icon
+        background-image: url('../assets/icons/cancel.png')
+
+.game-mode
+    display: flex
+    justify-content: space-around
+    align-items: center
+    .game-mode-btn
+        border: none
+        background-color: rgba(0, 0, 0 ,0)
+        cursor: pointer
+        transition: transform 0.5s
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        .game-mode-label
+            transition: opacity 0.3s
+            opacity: 0
+            color: $second-color
+            margin-top: 5px
+        .game-mode-icon
+            display: inline-block
+            width: 36px
+            height: 36px
+            background-size: contain
+            @media (min-width: 768px)
+                width: 48px
+                height: 48px
+        .single-icon
+            background-image: url('../assets/icons/single.png')
+        .multi-icon
+            background-image: url('../assets/icons/multiplayer.png')
+        .ai-icon
+            background-image: url('../assets/icons/ai.png')
+        &.active .game-mode-label
+            opacity: 1
+        &:hover,  &:active
+            transform: scale(1.25)
+            .game-mode-label
+                opacity: 1
+
+.tic-tac-toe-game.multiplayer 
+    .game-mode
+        display: none
+    .multiplayer-options
+        display: flex
+
+.multiplayer-options
+    display: none
+    justify-content: space-around
+    align-items: center
+    .multiplayer-game-timer-container
+        position: relative
+        bottom: 5px
+    .multiplayer-game-timer
+        font-size: 1.2rem
+        letter-spacing: 1px
+        @media (min-width: 768px)
+            font-size: 1.3rem
+        @media (min-width: 1900px)
+            font-size: 1.5rem
+    .options-btn
+        border: none
+        background-color: rgba(0, 0, 0 ,0)
+        cursor: pointer
+        transition: transform 0.5s
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        .options-label
+            opacity: 0
+            text-align: left
+            color: $second-color
+            transition: opacity 0.3s
+        .options-icon
+            display: inline-block
+            width: 36px
+            height: 36px
+            background-size: contain
+            @media (min-width: 768px)
+                width: 48px
+                height: 48px
+        &#leave-btn .options-icon
+            position: relative
+            left: 1px
+            background-image: url('../assets/icons/leave.png')
+            @media (min-width: 768px)
+                left: 2px
+        &#settings-btn .options-icon
+            background-image: url('../assets/icons/settings.png')
+        &:hover, &:active
+            transform: scale(1.25)
+            .options-label
+                opacity: 1
+.multiplayer-game-settings.show ~ .multiplayer-options #settings-btn .options-icon
+        background-image: url('../assets/icons/tic-tac-toe.png')
+
+
+.multiplayer-game-settings
+    display: none
+    flex-direction: column
+    position: absolute
+    top: 0
+    width: 100%
+    height: 100%
+    background-color: #fff
+    box-shadow: 0px 0px 15px 3px $main-color
+    padding: 20px
+    z-index: 2
+    &.show
+        display: flex
+    .settings > *
+        letter-spacing: 1px
+        margin-bottom: 5px
+        line-height: 1.5rem
+        @media (min-width:  768px)
+            margin-bottom: 10px
+    .title-game-settings
+        text-align: center
+        margin: 0
+        margin-bottom: 20px
+        @media (min-width:  768px)
+            margin-bottom: 30px
+        @media (min-width:  1900px)
+            margin-bottom: 35px
+    .timeout-label
+        display: block
+        margin-top: 25px
+        line-height: 1.5rem
+        @media (min-width: 768px)
+            margin-top: 30px
+            line-height: 2rem
+        @media (min-width:  1900px)
+            margin-top: 20px
+        #request-timeout
+            margin-left: 5px
+            height: 1.5rem
+            background-color: $second-color
+            color: #fff
+            border: none
+            cursor: pointer
+            font-family: "evil-empire"
+            letter-spacing: 1px
+            position: relative
+            bottom: 1px
+            @media (min-width: 768px)
+                height: 2rem
+    .changes-disclaimer
+        margin: auto 0 0
+        text-align: center
+        color: #b00
+
+.multiplayer-game-rematch
+    .buttons
+        display: flex
+        gap: 20px
+        margin-top: 15px
+        #game-leave,
+        #game-rematch
+            margin: 0
+            width: 100px

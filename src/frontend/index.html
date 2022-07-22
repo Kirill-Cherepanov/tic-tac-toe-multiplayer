@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="favicon.png" type="image/png" />
+        <title>Tic tac toe</title>
+    </head>
+    <body>
+        <div class="page">
+            <h1 class="tic-tac-toe-title">Tic Tac Toe</h1>
+            <div class="tic-tac-toe-game">
+                <div class="gameboard" id="gameboard">
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                    <div class="cell" data-cell></div>
+                </div>
+
+                <div class="end-message" data-end-message>
+                    <div class="end-text" data-end-text></div>
+                    <button id="restart-button" data-restart-button>
+                        Restart
+                    </button>
+                </div>
+
+                <div class="multiplayer-menu" data-multiplayer-menu>
+                    <div class="username-form-container">
+                        <form id="username-form">
+                            <label for="username" class="username-label"
+                                >Enter your user name</label
+                            >
+                            <input type="text" name="username" id="username" />
+                            <button type="submit" id="submit-username">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                    <div class="pending-invites"></div>
+                    <div class="players-online"></div>
+                </div>
+
+                <div class="end-message multiplayer-game-start">
+                    <div class="end-text" data-start-game-text>
+                        Match against<br />[username]
+                    </div>
+                    <button id="game-start" data-game-start>Start</button>
+                </div>
+                <div class="end-message multiplayer-game-rematch">
+                    <div class="end-text" data-retry-text>[username] won!</div>
+                    <div class="buttons">
+                        <button id="game-leave" data-game-leave>Leave</button>
+                        <button id="game-rematch" data-game-start>
+                            Rematch
+                        </button>
+                    </div>
+                </div>
+
+                <div class="multiplayer-game-settings">
+                    <h2 class="title-game-settings">Settings</h2>
+                    <form class="settings" data-settings>
+                        <div class="opponent-move-time" data-opponent-move-time>
+                            Opponent move time: [time]
+                        </div>
+                        <div class="player-move-time-label">
+                            Your move time:
+                            <select
+                                name="player-move-time"
+                                id="player-move-time"
+                            >
+                                <option value="3">3</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="unlimited">∞</option>
+                            </select>
+                            seconds
+                        </div>
+                        <div class="final-move-time" data-final-move-time>
+                            Final move time: [time]
+                        </div>
+                        <label for="timeout-time" class="timeout-label"
+                            >Take a
+                            <select name="timeout-time" id="timeout-time">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            munute
+                            <button type="submit" id="request-timeout">
+                                Time-out
+                            </button>
+                        </label>
+                    </form>
+                    <p class="changes-disclaimer">
+                        All the changes will be applied after the end of this
+                        round
+                    </p>
+                </div>
+
+                <div class="game-mode">
+                    <button
+                        id="single-button"
+                        class="game-mode-btn active"
+                        data-game-mode="single"
+                    >
+                        <i class="game-mode-icon single-icon"></i>
+                        <label class="game-mode-label">Singleplayer</label>
+                    </button>
+                    <button
+                        id="multi-button"
+                        class="game-mode-btn"
+                        data-game-mode="multi"
+                    >
+                        <i class="game-mode-icon multi-icon"></i>
+                        <label class="game-mode-label">Multiplayer</label>
+                    </button>
+                    <button
+                        id="ai-button"
+                        class="game-mode-btn"
+                        data-game-mode="ai"
+                    >
+                        <i class="game-mode-icon ai-icon"></i>
+                        <label class="game-mode-label">Against AI</label>
+                    </button>
+                </div>
+                <div class="multiplayer-options">
+                    <button class="options-btn" id="settings-btn">
+                        <i class="options-icon"></i>
+                        <label class="options-label">Settings</label>
+                    </button>
+                    <div class="multiplayer-game-timer-container">
+                        <div class="multiplayer-game-timer" data-timer>
+                            01:00
+                        </div>
+                    </div>
+                    <button class="options-btn" id="leave-btn">
+                        <i class="options-icon"></i>
+                        <label class="options-label">Leave</label>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
