@@ -17,7 +17,7 @@ const UPDATE_SESSION_TIME = 1000;
 
 const TIMINGS = {
   move: [3, 5, 10, 15, 30, Infinity],
-  pause: 30
+  pause: 1000
 };
 
 io.on('connection', function (socket) {
