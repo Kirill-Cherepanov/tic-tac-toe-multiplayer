@@ -24,9 +24,6 @@ export default class TicTacToeInvitation {
   initialize(username: string): void {
     localStorage.setItem('username', username);
 
-    this.multiPlayerMenu.classList.remove('entering-username');
-    this.multiPlayerMenu.classList.add('search');
-
     this.connectToServer();
 
     if (this.socket === undefined) {
@@ -200,35 +197,47 @@ export default class TicTacToeInvitation {
   }
   protected connectToServer() {
     if (this.socket !== undefined) return;
-
     this.socket = io('http://192.168.100.2:3000/') as Socket<
       ServerToClientEvents,
       ClientToServerEvents
     >;
 
-    this.socket.on('sessionsupdate', (sessionsData) => {
-      this.updateSessions(sessionsData);
+    this.socket.on('enterFailure', (message) => {
+      const errorMessageDiv = document.createElement('div');
+      errorMessageDiv.classList.add('connection-error');
+      errorMessageDiv.innerText = message;
+      document.getElementById('username-form')?.append(errorMessageDiv);
     });
 
-    this.socket.on('startGame', (...args) => {
-      if (this.socket === undefined)
-        throw Error('How in the world has this happened? Socket is undefined!');
+    this.socket.on('enterSuccess', () => {
+      if (this.socket === undefined) return;
 
-      this.multiPlayerMenu.classList.remove('entering-username');
-      this.multiPlayerMenu.classList.remove('search');
-      this.multiPlayerMenu.parentElement?.classList.add('multiplayer');
+      this.socket.on('sessionsupdate', (sessionsData) => {
+        this.multiPlayerMenu.classList.remove('entering-username');
+        this.multiPlayerMenu.classList.add('search');
+        this.updateSessions(sessionsData);
+      });
 
-      this.multiplayer.initialize(...args, this.socket);
+      this.socket.on('startGame', (...args) => {
+        if (this.socket === undefined)
+          throw Error('How in the world did this happen? Socket is undefined!');
 
-      this.socket.on('gameOver', () => {
+        this.multiPlayerMenu.classList.remove('entering-username');
+        this.multiPlayerMenu.classList.remove('search');
+        this.multiPlayerMenu.parentElement?.classList.add('multiplayer');
+
+        this.multiplayer.initialize(...args, this.socket);
+
+        this.socket.on('gameOver', () => {
+          this.multiPlayerMenu.classList.add('search');
+          this.multiPlayerMenu.parentElement?.classList.remove('multiplayer');
+        });
+      });
+
+      this.multiplayer.leaveButton.addEventListener('click', (e) => {
         this.multiPlayerMenu.classList.add('search');
         this.multiPlayerMenu.parentElement?.classList.remove('multiplayer');
       });
-    });
-
-    this.multiplayer.leaveButton.addEventListener('click', (e) => {
-      this.multiPlayerMenu.classList.add('search');
-      this.multiPlayerMenu.parentElement?.classList.remove('multiplayer');
     });
   }
 }

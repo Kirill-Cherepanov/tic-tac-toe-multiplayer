@@ -1,4 +1,6 @@
 interface ServerToClientEvents {
+  enterSuccess: () => void;
+  enterFailure: (message: string) => void;
   sessionsupdate: (sessionData: SessionData[]) => void;
   invite: (inviter: string) => void; // Here we send socketID of the inviter
   startGame: (opponent: string, xTurn: boolean) => void;

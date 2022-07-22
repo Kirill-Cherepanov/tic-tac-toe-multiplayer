@@ -1,11 +1,11 @@
-@font-face 
+@font-face
     font-family: "evil-empire"
     src: url("../assets/fonts/EvilEmpire.ttf")
 
 $main-color: #43A6C6
 $second-color: darken($main-color, 30%)
-    
-*, *::after, *::before 
+
+*, *::after, *::before
     box-sizing: border-box
 
 body
@@ -13,7 +13,7 @@ body
     margin: 0
 
 h2
-    @media (min-width: 768px) 
+    @media (min-width: 768px)
         font-size: 1.8rem
     @media (min-width: 1900px)
         font-size: 2rem
@@ -21,7 +21,7 @@ h2
 .page
     margin: 0 auto
     width: 315px
-    @media (min-width: 768px) 
+    @media (min-width: 768px)
         width: 380px
     @media (min-width: 1900px)
         width: 470px
@@ -36,13 +36,12 @@ h2
     @media (min-width: 1900px)
         font-size: 3rem
 
-
 .tic-tac-toe-game
     color: $second-color
     position: relative
     width: 315px
     height: 315px
-    @media (min-width: 768px) 
+    @media (min-width: 768px)
         width: 380px
         height: 380px
     @media (min-width: 1900px)
@@ -52,7 +51,7 @@ h2
 .gameboard
     width: 100%
     height: 100%
-    margin-bottom: 15px 
+    margin-bottom: 15px
     gap: 5px
     display: grid
     grid-template-rows: repeat(3, 1fr)
@@ -92,11 +91,11 @@ h2
 
 .cell.x::before,
 .gameboard.x .cell:not(.x):not(.o):hover::before
-    transform: rotate(45deg) 
+    transform: rotate(45deg)
 
 .cell.x::after,
 .gameboard.x .cell:not(.x):not(.o):hover::after
-    transform: rotate(-45deg) 
+    transform: rotate(-45deg)
 
 .cell.o::before,
 .cell.o::after,
@@ -105,12 +104,11 @@ h2
     position: absolute
     content: ''
     border-radius: 50%
-    
+
 .cell.o::before,
 .gameboard.o .cell:not(.x):not(.o):hover::before
     width: 85%
     height: 85%
-
 
 .cell.o::after,
 .gameboard.o .cell:not(.x):not(.o):hover::after
@@ -136,7 +134,7 @@ h2
         text-align: center
         font-size: 2rem
         letter-spacing: 1px
-    #restart-button, 
+    #restart-button,
     #game-start,
     #game-leave,
     #game-rematch
@@ -170,7 +168,7 @@ h2
         .pending-invites.show,
         .players-online
             display: flex
-    &.entering-username 
+    &.entering-username
         display: flex
         .username-form-container
             display: flex
@@ -202,6 +200,13 @@ h2
             color: #fff
             border-radius: 3px
             cursor: pointer
+        .connection-error
+            color: #B00
+            text-align: center
+            margin-top: 5px
+            position: absolute
+            top: 190px
+            width: 175px
 
 .pending-invites
     display: none
@@ -213,7 +218,7 @@ h2
     position: relative
     gap: 10px
     margin-bottom: 10px
-    box-shadow: 0px 5px 10px #888;
+    box-shadow: 0px 5px 10px #888
     @media (min-width: 768px)
         max-height: 170px
     &:last-child
@@ -311,7 +316,7 @@ h2
             .game-mode-label
                 opacity: 1
 
-.tic-tac-toe-game.multiplayer 
+.tic-tac-toe-game.multiplayer
     .game-mode
         display: none
     .multiplayer-options
@@ -366,8 +371,7 @@ h2
             .options-label
                 opacity: 1
 .multiplayer-game-settings.show ~ .multiplayer-options #settings-btn .options-icon
-        background-image: url('../assets/icons/tic-tac-toe.png')
-
+    background-image: url('../assets/icons/tic-tac-toe.png')
 
 .multiplayer-game-settings
     display: none

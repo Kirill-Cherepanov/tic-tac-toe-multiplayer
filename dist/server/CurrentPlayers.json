@@ -1,9 +1,1 @@
-{
-  "players": {},
-  "games": {
-    "fake_room": {
-      "players": { "fake_id1": "KissMy", "fake_id2": "Kot-payk" },
-      "currentGame": [null, null, null, null, null, null, null, null, null]
-    }
-  }
-}
+{"players":{"JwSBFtJeJGC23-GaAAAb":{"username":"Nice nickname2","invited":[],"wasInvited":[]},"R2Urs-pz2-FEnzb9AAAd":{"username":"Nice nickname","invited":[],"wasInvited":[]}},"games":{"fake_room":{"players":{"fake_id1":"KissMy","fake_id2":"Kot-payk"},"currentGame":[null,null,null,null,null,null,null,null,null]}}}

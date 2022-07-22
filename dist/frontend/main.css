@@ -212,6 +212,13 @@ body {
       color: #fff;
       border-radius: 3px;
       cursor: pointer; }
+    .username-form-container #username-form .connection-error {
+      color: #B00;
+      text-align: center;
+      margin-top: 5px;
+      position: absolute;
+      top: 190px;
+      width: 175px; }
 
 .pending-invites {
   display: none;

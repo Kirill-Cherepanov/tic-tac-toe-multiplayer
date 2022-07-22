@@ -54,7 +54,12 @@ io.on('connection', function (socket) {
       }, UPDATE_SESSION_TIME);
     };
 
-    addUser(dbData, socket.id, username);
+    const isSuccess = addUser(dbData, socket.id, username);
+    if (!isSuccess) {
+      socket.emit('enterFailure', 'username already exists');
+      return;
+    }
+    socket.emit('enterSuccess');
     await updateDb(dbData);
     sessionsUpdater(socket);
 
@@ -235,12 +240,18 @@ function getSessionDataFromPlayers(
     });
 }
 
-function addUser(dbData: DbData, socketID: string, username: string): void {
+function addUser(dbData: DbData, socketID: string, username: string): boolean {
+  const isUsernameInDb = Object.values(dbData.players)
+    .map((player) => player.username)
+    .includes(username);
+  if (isUsernameInDb) return false;
+
   dbData.players[socketID] = {
     username: username,
     invited: [],
     wasInvited: []
   };
+  return true;
 }
 
 function deleteUser(dbData: DbData, socketID: string): void {
