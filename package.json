@@ -2,7 +2,7 @@
   "name": "tic-tac-toe-online",
   "version": "1.0.0",
   "description": "A tic tac toe online game",
-  "main": "index.js",
+  "main": "dist/server/main.31c91bf15e509e779fff.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "prod": "cross-env NODE_ENV=production webpack --mode production",
