@@ -1,10 +1,11 @@
 import express from 'express';
 import path from 'path';
-import './app.ts';
+// import './app.ts';
 
 const app = express();
 
 app.listen(process.env.PORT || 8080);
+console.log(process);
 
 app.use(express.static(path.resolve(__dirname, '../frontend')));
 

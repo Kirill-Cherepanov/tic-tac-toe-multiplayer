@@ -197,7 +197,9 @@ export default class TicTacToeInvitation {
   }
   protected connectToServer() {
     if (this.socket !== undefined) return;
-    this.socket = io('https://powerful-chamber-21934.herokuapp.com/') as Socket<
+    const HEROKU = 'https://powerful-chamber-21934.herokuapp.com/';
+    const LOCAL = 'http://192.168.100.2:3000/';
+    this.socket = io(LOCAL) as Socket<
       ServerToClientEvents,
       ClientToServerEvents
     >;

@@ -7,7 +7,7 @@ const io = new Server<
   ServerToClientEvents,
   InterServerEvents,
   SocketData
->(3000, {
+>(Number(process.env.PORT) || 3000, {
   cors: {
     origin: true
   }

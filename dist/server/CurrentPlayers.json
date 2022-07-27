@@ -1,12 +1,1 @@
-{
-  "players": {},
-  "games": {
-    "fake_room": {
-      "players": {
-        "fake_id1": "KissMy",
-        "fake_id2": "Kot-payk"
-      },
-      "currentGame": [null, null, null, null, null, null, null, null, null]
-    }
-  }
-}
+{"players":{},"games":{"fake_room":{"players":{"fake_id1":"KissMy","fake_id2":"Kot-payk"},"currentGame":[null,null,null,null,null,null,null,null,null]}}}
