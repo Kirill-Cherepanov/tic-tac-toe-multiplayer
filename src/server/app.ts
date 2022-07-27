@@ -1,15 +1,23 @@
 import { Server, Socket } from 'socket.io';
 import fs from 'fs/promises';
 import Timer from './Timer';
+import http from 'http';
+
+const httpServer = http.createServer();
+httpServer.listen(Number(process.env.PORT) || 3000);
 
 const io = new Server<
   ClientToServerEvents,
   ServerToClientEvents,
   InterServerEvents,
   SocketData
->(Number(process.env.PORT) || 3000, {
+>(httpServer, {
   cors: {
-    origin: true
+    origin: [
+      'https://zesty-gecko-26d2c4.netlify.app/',
+      'http://127.0.0.1:8080'
+    ],
+    methods: ['GET', 'POST']
   }
 });
 
